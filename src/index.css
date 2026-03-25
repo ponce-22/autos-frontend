@@ -1,0 +1,26 @@
+:root {
+  --primary: #8b5cf6;
+  --primary-hover: #7c3aed;
+  --bg-gradient: radial-gradient(circle at top right, #1e1b4b, #0f172a, #000000);
+  --glass: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg-gradient);
+  background-attachment: fixed;
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif; /* Sugerencia: Importa Poppins en tu index.html */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+h1, h3 {
+  letter-spacing: -1px;
+  font-weight: 700;
+}
