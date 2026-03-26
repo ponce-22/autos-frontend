@@ -12,8 +12,10 @@ function App() {
   const [vista, setVista] = useState("inventario");
   const [autoSeleccionado, setAutoSeleccionado] = useState(null); // modal
 
+  const API_BASE_URL = 'https://autos-backend-ea86.onrender.com/api';
+
   useEffect(() => {
-    axios.get('http://localhost:5000/api/autos').then(res => setAutos(res.data));
+    axios.get(`${API_BASE_URL}/autos`).then(res => setAutos(res.data));
   }, []);
 
   // Bloquear scroll cuando el modal está abierto
@@ -30,7 +32,7 @@ function App() {
       const resultado = await signInWithPopup(auth, provider);
       const googleUser = resultado.user;
       setUser(googleUser);
-      await axios.post('http://localhost:5000/api/usuarios', {
+      await axios.post(`${API_BASE_URL}/usuarios`, {
         nombre: googleUser.displayName,
         correo: googleUser.email,
         foto: googleUser.photoURL
@@ -42,7 +44,7 @@ function App() {
 
   const agendarCita = async (auto) => {
     try {
-      const res = await axios.post('http://localhost:5000/api/citas', {
+      const res = await axios.post(`${API_BASE_URL}/citas`, {
         autoNombre: auto.nombre,
         nombre: user.displayName,
         telefono: '',
@@ -202,4 +204,4 @@ function App() {
   );
 }
 
-export default App;
+export default App; 
