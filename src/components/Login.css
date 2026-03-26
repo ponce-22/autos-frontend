@@ -1,0 +1,64 @@
+.login-full {
+  min-height: 100vh;
+  width: 100vw;
+  background: radial-gradient(ellipse at 60% 40%, #0d2340 0%, #08111f 70%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.login-full::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #4a9fd4, transparent);
+}
+
+.login-box {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  z-index: 1;
+}
+
+.login-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 5.5rem;
+  font-weight: 300;
+  letter-spacing: 0.12em;
+  color: #e8eff7;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.login-sub {
+  color: #4a6a8a;
+  font-size: 0.9rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  font-weight: 300;
+}
+
+.btn-google-simple {
+  background: transparent;
+  border: 1px solid #4a9fd4;
+  color: #4a9fd4;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.95rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  padding: 1.1rem 4rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.btn-google-simple:hover {
+  background: #4a9fd4;
+  color: #08111f;
+}
