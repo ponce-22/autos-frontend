@@ -6,9 +6,9 @@ import MapaGeolocalizacion from './MapaGeolocalizacion';
 import './App.css';
 
 const ADMIN_EMAIL = 'juanescobar2006728@gmail.com';
-const API = 'https://autos-backend-ea86.onrender.com/api';
+const API_BASE_URL = 'https://autos-backend-ea86.onrender.com/api';
 
-// ─── FORMULARIO DE AUTO (agregar / editar) ───────────────────────────────────
+// ─── FORMULARIO AGREGAR / EDITAR AUTO ────────────────────────────────────────
 function FormAuto({ inicial, onGuardar, onCancelar }) {
   const vacio = {
     nombre: '', año: '', precio: '', caracteristicas: '',
@@ -74,23 +74,26 @@ function App() {
   const [citas, setCitas] = useState([]);
   const [busqueda, setBusqueda] = useState("");
   const [vista, setVista] = useState("inventario");
-  const [adminTab, setAdminTab] = useState("autos"); // "autos" | "citas"
+  const [adminTab, setAdminTab] = useState("autos");
   const [autoSeleccionado, setAutoSeleccionado] = useState(null);
-  const [modoForm, setModoForm] = useState(null); // null | "agregar" | auto objeto
+  const [modoForm, setModoForm] = useState(null); // null | "agregar" | objeto auto
   const [confirmEliminar, setConfirmEliminar] = useState(null);
 
   const cargarAutos = () =>
-    axios.get(`${API}/autos`).then(res => setAutos(res.data));
+    axios.get(`${API_BASE_URL}/autos`).then(res => setAutos(res.data));
 
   const cargarCitas = () =>
-    axios.get(`${API}/citas`).then(res => setCitas(res.data));
+    axios.get(`${API_BASE_URL}/citas`).then(res => setCitas(res.data));
 
   useEffect(() => { cargarAutos(); }, []);
 
   useEffect(() => {
-    if (autoSeleccionado) document.body.style.overflow = 'hidden';
-    else document.body.style.overflow = '';
-  }, [autoSeleccionado]);
+    if (autoSeleccionado || modoForm || confirmEliminar) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [autoSeleccionado, modoForm, confirmEliminar]);
 
   // ── Login ──
   const loginGoogle = async () => {
@@ -104,7 +107,7 @@ function App() {
         setVista("dashboard");
         cargarCitas();
       }
-      await axios.post(`${API}/usuarios`, {
+      await axios.post(`${API_BASE_URL}/usuarios`, {
         nombre: googleUser.displayName,
         correo: googleUser.email,
         foto: googleUser.photoURL
@@ -120,10 +123,10 @@ function App() {
     setVista("inventario");
   };
 
-  // ── Citas ──
+  // ── Agendar cita (cliente) ──
   const agendarCita = async (auto) => {
     try {
-      const res = await axios.post(`${API}/citas`, {
+      const res = await axios.post(`${API_BASE_URL}/citas`, {
         autoNombre: auto.nombre,
         nombre: user.displayName,
         telefono: '',
@@ -132,17 +135,18 @@ function App() {
       alert(res.data.mensaje);
       setAutoSeleccionado(null);
     } catch (error) {
-      alert('No se pudo agendar la cita.');
+      console.error('Error al agendar cita:', error);
+      alert('No se pudo agendar la cita. Intenta de nuevo.');
     }
   };
 
-  // ── CRUD Autos ──
+  // ── CRUD autos (admin) ──
   const guardarAuto = async (datos) => {
     try {
       if (modoForm === "agregar") {
-        await axios.post(`${API}/autos`, datos);
+        await axios.post(`${API_BASE_URL}/autos`, datos);
       } else {
-        await axios.put(`${API}/autos/${modoForm._id}`, datos);
+        await axios.put(`${API_BASE_URL}/autos/${modoForm._id}`, datos);
       }
       await cargarAutos();
       setModoForm(null);
@@ -153,7 +157,7 @@ function App() {
 
   const eliminarAuto = async (id) => {
     try {
-      await axios.delete(`${API}/autos/${id}`);
+      await axios.delete(`${API_BASE_URL}/autos/${id}`);
       await cargarAutos();
       setConfirmEliminar(null);
     } catch (error) {
@@ -165,13 +169,13 @@ function App() {
     a.nombre.toLowerCase().includes(busqueda.toLowerCase())
   );
 
-  // ── LOGIN SCREEN ──
+  // ── LOGIN ──
   if (!user) {
     return (
       <div className="login-full">
         <div className="login-box">
           <h1 className="login-title">Autos <span className="gold">Seminuevos</span></h1>
-          <p className="login-sub">Portal exclusivo de confianza</p>
+          <p className="login-sub">Portal exclusivo de confianza en Tapachula</p>
           <button className="btn-google-simple" onClick={loginGoogle}>
             Iniciar sesión con Google
           </button>
@@ -199,7 +203,7 @@ function App() {
           </div>
         </nav>
 
-        {/* ── TAB: AUTOS ── */}
+        {/* TAB AUTOS */}
         {adminTab === 'autos' && (
           <div className="dashboard">
             <div className="dashboard-header">
@@ -214,7 +218,9 @@ function App() {
 
             {modoForm && (
               <div className="form-container">
-                <h3 className="form-title">{modoForm === "agregar" ? "Agregar nuevo auto" : `Editando: ${modoForm.nombre}`}</h3>
+                <h3 className="form-title">
+                  {modoForm === "agregar" ? "Agregar nuevo auto" : `Editando: ${modoForm.nombre}`}
+                </h3>
                 <FormAuto
                   inicial={modoForm !== "agregar" ? modoForm : null}
                   onGuardar={guardarAuto}
@@ -260,7 +266,7 @@ function App() {
           </div>
         )}
 
-        {/* ── TAB: CITAS ── */}
+        {/* TAB CITAS */}
         {adminTab === 'citas' && (
           <div className="dashboard">
             <div className="dashboard-header">
@@ -359,7 +365,9 @@ function App() {
                 <div className="pcard-info">
                   <h3 className="pcard-name">{auto.nombre}</h3>
                   <p className="pcard-carac">{auto.color} · {auto.transmision}</p>
-                  <div className="pcard-price">${auto.precio?.toLocaleString()} <span>MXN</span></div>
+                  <div className="pcard-price">
+                    ${auto.precio.toLocaleString()} <span>MXN</span>
+                  </div>
                   <button className="pcard-btn">Ver más información</button>
                 </div>
               </div>
@@ -373,9 +381,11 @@ function App() {
           <div className="ptitle-sec">
             <h2>Mapa de Tiendas</h2>
             <div className="pdivider"></div>
-            <p className="psubtitle">Encuentra nuestras sucursales</p>
+            <p className="psubtitle">Encuentra nuestras sucursales en Tapachula</p>
           </div>
-          <div className="mapa-wrapper"><MapaGeolocalizacion /></div>
+          <div className="mapa-wrapper">
+            <MapaGeolocalizacion />
+          </div>
         </div>
       )}
 
@@ -393,24 +403,29 @@ function App() {
                   <p className="modal-sub">{autoSeleccionado.año} · {autoSeleccionado.color}</p>
                 </div>
                 <div className="modal-precio">
-                  ${autoSeleccionado.precio?.toLocaleString()}
+                  ${autoSeleccionado.precio.toLocaleString()}
                   <span>MXN</span>
                 </div>
               </div>
               <div className="modal-divider"></div>
               <p className="modal-descripcion">{autoSeleccionado.caracteristicas}</p>
               <div className="modal-specs">
-                {[
-                  ['Kilometraje', autoSeleccionado.km],
-                  ['Transmisión', autoSeleccionado.transmision],
-                  ['Motor', autoSeleccionado.motor],
-                  ['Dueños', autoSeleccionado.duenos],
-                ].map(([label, val]) => (
-                  <div className="modal-spec" key={label}>
-                    <span className="spec-label">{label}</span>
-                    <span className="spec-val">{val || 'N/D'}</span>
-                  </div>
-                ))}
+                <div className="modal-spec">
+                  <span className="spec-label">Kilometraje</span>
+                  <span className="spec-val">{autoSeleccionado.km || 'N/D'}</span>
+                </div>
+                <div className="modal-spec">
+                  <span className="spec-label">Transmisión</span>
+                  <span className="spec-val">{autoSeleccionado.transmision || 'N/D'}</span>
+                </div>
+                <div className="modal-spec">
+                  <span className="spec-label">Motor</span>
+                  <span className="spec-val">{autoSeleccionado.motor || 'N/D'}</span>
+                </div>
+                <div className="modal-spec">
+                  <span className="spec-label">Dueños</span>
+                  <span className="spec-val">{autoSeleccionado.duenos || 'N/D'}</span>
+                </div>
               </div>
               <button className="modal-btn" onClick={() => agendarCita(autoSeleccionado)}>
                 Agendar Cotización

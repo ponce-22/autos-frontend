@@ -101,8 +101,8 @@ body {
   align-items: center;
   padding: 0 2.5rem;
   height: 64px;
-  background: #020c17;          /* más oscuro que el fondo para que resalte */
-  border-bottom: 1px solid #4a9fd4;  /* línea azul abajo del nav */
+  background: #020c17;
+  border-bottom: 1px solid #4a9fd4;
   width: 100%;
   position: sticky;
   top: 0;
@@ -115,7 +115,7 @@ body {
   letter-spacing: 0.4em;
   font-weight: 600;
   text-transform: uppercase;
-  color: #ffffff;               /* blanco puro para máximo contraste */
+  color: #ffffff;
 }
 
 .search-bar-full {
@@ -158,7 +158,7 @@ body {
 .pmenu-btn {
   background: transparent;
   border: none;
-  color: #8aaec8;               /* gris azulado claro, visible */
+  color: #8aaec8;
   font-family: 'Rajdhani', sans-serif;
   font-size: 0.85rem;
   letter-spacing: 0.25em;
@@ -182,14 +182,14 @@ body {
 .puser-name {
   font-size: 0.82rem;
   letter-spacing: 0.12em;
-  color: #8aaec8;               /* mismo tono que los botones de menú */
+  color: #8aaec8;
   font-family: 'Barlow', sans-serif;
 }
 
 .pbtn-salir {
   background: transparent;
   border: 1px solid #4a2020;
-  color: #e05555;               /* rojo más brillante para que se vea */
+  color: #e05555;
   font-family: 'Rajdhani', sans-serif;
   font-size: 0.8rem;
   letter-spacing: 0.2em;
@@ -261,9 +261,7 @@ body {
   position: relative;
 }
 
-.pcard:hover {
-  background: #0f2236;
-}
+.pcard:hover { background: #0f2236; }
 
 .pcard::before {
   content: '';
@@ -276,9 +274,7 @@ body {
   z-index: 1;
 }
 
-.pcard:hover::before {
-  transform: scaleX(1);
-}
+.pcard:hover::before { transform: scaleX(1); }
 
 .pcard-img {
   width: 100%;
@@ -296,9 +292,7 @@ body {
   transition: transform 0.5s ease;
 }
 
-.pcard:hover .pcard-img img {
-  transform: scale(1.06);
-}
+.pcard:hover .pcard-img img { transform: scale(1.06); }
 
 .overlay {
   position: absolute;
@@ -306,9 +300,7 @@ body {
   background: linear-gradient(to top, #0b1929 0%, transparent 55%);
 }
 
-.pcard-info {
-  padding: 1.4rem 1.6rem 1.6rem;
-}
+.pcard-info { padding: 1.4rem 1.6rem 1.6rem; }
 
 .pcard-name {
   font-family: 'Rajdhani', sans-serif;
@@ -499,10 +491,7 @@ body {
   text-align: right;
 }
 
-.modal-divider {
-  height: 1px;
-  background: #0f2236;
-}
+.modal-divider { height: 1px; background: #0f2236; }
 
 .modal-descripcion {
   font-size: 0.9rem;
@@ -562,12 +551,8 @@ body {
 }
 
 @media (max-width: 700px) {
-  .modal-box {
-    grid-template-columns: 1fr;
-  }
-  .modal-img {
-    min-height: 220px;
-  }
+  .modal-box { grid-template-columns: 1fr; }
+  .modal-img { min-height: 220px; }
 }
 
 /* ─── DASHBOARD ADMIN ────────────────────── */
@@ -582,9 +567,7 @@ body {
   border-radius: 2px;
 }
 
-.dashboard {
-  padding: 2.5rem;
-}
+.dashboard { padding: 2.5rem; }
 
 .dashboard-header {
   display: flex;
@@ -610,7 +593,7 @@ body {
   margin-top: 0.3rem;
 }
 
-/* ─── BOTONES ────────────────────────────── */
+/* ─── BOTONES ADMIN ──────────────────────── */
 .btn-primary {
   background: #4a9fd4;
   border: none;
@@ -729,10 +712,7 @@ body {
   font-size: 1rem;
 }
 
-.table-actions {
-  display: flex;
-  gap: 0.5rem;
-}
+.table-actions { display: flex; gap: 0.5rem; }
 
 .table-empty {
   text-align: center;
@@ -770,9 +750,7 @@ body {
   .form-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
-.form-field--full {
-  grid-column: 1 / -1;
-}
+.form-field--full { grid-column: 1 / -1; }
 
 .form-label {
   display: block;
@@ -796,11 +774,7 @@ body {
 }
 
 .form-input:focus { border-color: #4a9fd4; }
-
-.form-textarea {
-  resize: vertical;
-  min-height: 80px;
-}
+.form-textarea { resize: vertical; min-height: 80px; }
 
 .form-actions {
   display: flex;
@@ -808,7 +782,7 @@ body {
   margin-top: 1.5rem;
 }
 
-/* ─── CONFIRM ────────────────────────────── */
+/* ─── CONFIRMAR ELIMINAR ─────────────────── */
 .confirm-box {
   background: #0b1929;
   border: 1px solid #4a2020;
