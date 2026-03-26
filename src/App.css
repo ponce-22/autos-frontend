@@ -569,3 +569,272 @@ body {
     min-height: 220px;
   }
 }
+
+/* ─── DASHBOARD ADMIN ────────────────────── */
+.admin-badge {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #4a9fd4;
+  border: 1px solid #1a3a55;
+  padding: 4px 12px;
+  border-radius: 2px;
+}
+
+.dashboard {
+  padding: 2.5rem;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+}
+
+.dashboard-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  color: #e8eff7;
+  text-transform: uppercase;
+}
+
+.dashboard-sub {
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  color: #2a4a6a;
+  text-transform: uppercase;
+  margin-top: 0.3rem;
+}
+
+/* ─── BOTONES ────────────────────────────── */
+.btn-primary {
+  background: #4a9fd4;
+  border: none;
+  color: #08111f;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 0.75rem 1.8rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.btn-primary:hover { background: #3a8fc4; }
+
+.btn-secondary {
+  background: transparent;
+  border: 1px solid #1a3a55;
+  color: #8aaec8;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 0.75rem 1.8rem;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.btn-secondary:hover { border-color: #4a9fd4; color: #4a9fd4; }
+
+.btn-edit {
+  background: transparent;
+  border: 1px solid #1a3a55;
+  color: #4a9fd4;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  padding: 4px 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-edit:hover { background: #4a9fd4; color: #08111f; }
+
+.btn-delete {
+  background: transparent;
+  border: 1px solid #4a2020;
+  color: #e05555;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  padding: 4px 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-delete:hover { background: #e05555; color: #fff; border-color: #e05555; }
+
+/* ─── TABLA ──────────────────────────────── */
+.admin-table-wrap {
+  overflow-x: auto;
+  border: 1px solid #0f2236;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.admin-table thead tr {
+  background: #020c17;
+  border-bottom: 1px solid #4a9fd4;
+}
+
+.admin-table th {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #4a9fd4;
+  padding: 1rem 1.2rem;
+  text-align: left;
+  font-weight: 500;
+}
+
+.admin-table td {
+  padding: 1rem 1.2rem;
+  border-bottom: 1px solid #0f2236;
+  color: #8aaec8;
+  vertical-align: middle;
+}
+
+.admin-table tbody tr:hover { background: #0d1f33; }
+
+.table-auto-name {
+  color: #e8eff7;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+}
+
+.table-auto-color {
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  color: #2a4a6a;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+.table-price {
+  font-family: 'Rajdhani', sans-serif;
+  color: #7eb8e8;
+  font-size: 1rem;
+}
+
+.table-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.table-empty {
+  text-align: center;
+  color: #2a4a6a;
+  padding: 3rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* ─── FORMULARIO AUTO ────────────────────── */
+.form-container {
+  background: #0b1929;
+  border: 1px solid #1a3a55;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.form-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #4a9fd4;
+  margin-bottom: 1.5rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 900px) {
+  .form-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.form-field--full {
+  grid-column: 1 / -1;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #2a4a6a;
+  margin-bottom: 0.4rem;
+}
+
+.form-input {
+  width: 100%;
+  background: #0d1f33;
+  border: 1px solid #1a3a55;
+  color: #d4dce8;
+  padding: 0.6rem 1rem;
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.88rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.form-input:focus { border-color: #4a9fd4; }
+
+.form-textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+/* ─── CONFIRM ────────────────────────────── */
+.confirm-box {
+  background: #0b1929;
+  border: 1px solid #4a2020;
+  padding: 2.5rem;
+  text-align: center;
+  max-width: 380px;
+  width: 100%;
+}
+
+.confirm-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.2rem;
+  letter-spacing: 0.1em;
+  color: #e8eff7;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.confirm-sub {
+  color: #4a6a8a;
+  font-size: 0.88rem;
+  margin-bottom: 1.5rem;
+}
+
+.confirm-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
